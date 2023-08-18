@@ -24,9 +24,33 @@ My goal will be to combine spotify datasets to create one large dataset of songs
 ### Contents/Todo
 
 - [X] Data Exploration 
-- [ ] Data Cleaning and Preprocessing 
+- [X] Data Cleaning and Preprocessing 
 - [ ] Modeling
 - [ ] Advanced Modeling
+
+Basline Models and Genre Consolidation: 
+
+We have thoroughly explored the data. At this point, have improved upon the orginal EDA, run some baseline models using a few classifiers, and started the process of consoldiating genres. 
+
+Our baseline models included a logisitc regression model, a Decision Tree and a Random Forest. I expected the decision tree/random forest to yield better results based on the fact that it is looking at only a certain number of features at a time. The results are below: 
+
+
+| Baseline Model      | Train Score | Test Score |
+|---------------------|-------------|------------|
+| Logistic Regression | 5.1%        | 4.8%       |
+| Decision Tree       | 99.9%       | 25.0%      | 
+| Random Forest       | 99.9%       | 40.6%      | 
+
+As expected, we see a lot of overfitting, in part due to the lack of hyperparamter optimization but also due to the large amount of overlapping genres and unnecessary genres. 
+
+Our next step was to start the process of removing/combining genres in the dataset. We went ahead and removed unnecessary genres: genres that were grouped based on content (something we don't have a metric for) and genres that were grouped based on mood (we also don't have a metric for this and led to a lot overlap into other existing genres). Examples of these are study, sleep, kids, and disney. We also had a large number of genres that are a combination of different genres but sung in a particular language. Since we don't have a metric for that and we don't have a way to manually move each song into the appropriate genre, we removed these. 
+
+Another "issue" we ran into was finding a way to quantify different sub-genres belonging together. Using domain knowledge and research we were able to create 15-17 large genre groups. However, because the attributes of the music can vary greatly between the sub-genres, finding a way to quantify that they indeed make a good larger genre can important for our future model performance. We started out by using an ANOVA test to compare means and variance across a small subgroup based on one distinct feature and then comparing the distribution of the other columns. This is one technique we have come up with so far and will explore others. We only assume this will be an iterative process. During hyperparamter optimization and modeling we can always come back and adjust these. 
+
+All in all, this process led to a significant amount of lost data. This was a concern after Sprint 1. The plan is to pad these genres with Spotify songs from another clean dataset. If we end up having class imbalance, we can also consider adding weights to some of the genres. 
+
+The next steps are to continue the process of genre consolidation, add more songs from our other dataset and begin optimizing our models, including other classifiers in the process. 
+
 
 ## References 
 
