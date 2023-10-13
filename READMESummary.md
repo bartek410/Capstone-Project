@@ -36,7 +36,7 @@ My goal will be to use one or two Spotify datasets that contain the same attribu
 - [X] Modeling
 - [X] Advanced Modeling
 
-Baseline Models and Genre Consolidation: 
+## Baseline Models and Genre Consolidation: 
 
 We have thoroughly explored the data. At this point, have improved upon the original EDA, run some baseline models using a few classifiers, and started the process of consolidating genres. 
 
@@ -78,6 +78,8 @@ After running baseline models on 113 genres, we then ran baseline models on 85 g
 | KNN                            | 43.8        | 19.03      |
 
 We saw a significant increase in model performance on the test set when we reduced the number of genres from 85 to 8 distinct genres. However, there was still a significant amount of overfitting. We chose to optimize our best performing model, the Random Forest. Unfortunately, even after running a GridSearch, including dimension reduction, a scaler, and optimizing the max_features, min_samples_split, n_estimators, criterion, we got low train (40%) and test (37%) scores before the model started to overfit. Looking at our feature importances,  we saw that danceability and valence contributed the most to predicting our target variable, but overall the proportions were low.
+
+## Modeling and Unsupervised Learning 
 
 Initially, before reducing the number of genres from 113 to 85 to 8, we had thought about using clustering to find a way to quantify grouping certain genres together given the similarity between many of our genres. However, our PCA and k-means led to unexpected results. After running using PCA to reduce our dimensions to 3 and applying a MinMax scaler, we selected a total of 8 clusters based on the silhouette coefficients of our k-means. Within each cluster we saw wide range of genres, with overlapping genres between the clusters. 
 
